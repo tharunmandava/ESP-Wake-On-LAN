@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> ESP Wake-on-LAN</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <img src="/public/vite.svg" id="toggleLogo" class="logo" alt="Vite logo" />
+      <h1>Hello Whizzkid!</h1>
+      <div class="card">
+        <button id="yes" type="button">yes</button>
+        <button id="no" type="button">no</button>
+      </div>
+      <p class="status-text">
+        Status
+      </p>
+      <p class="status-text" id="status-text">
+        Placeholder
+      </p>
+      <div id="passwordScreen">
+        <input type="password" id="password" />
+        <button id="save">save</button>
+      </div>
+
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
