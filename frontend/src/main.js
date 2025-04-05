@@ -3,8 +3,9 @@ import axios from 'axios'
 
 //debug button
 document.getElementById("debugButton").addEventListener('click', () => {
-  console.log(localStorage.getItem("secret"));
-  console.log(localStorage.getItem("url"));
+  const url = localStorage.getItem("url");
+  const secret = localStorage.getItem("secret");
+  alert(`URL : ${url}\n SECRET : ${secret}`);
 });
 
 //save secret
