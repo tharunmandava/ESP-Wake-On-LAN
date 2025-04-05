@@ -1,6 +1,7 @@
 import './style.css'
 import axios from 'axios'
 
+
 //debug button
 document.getElementById("debugButton").addEventListener('click', () => {
   console.log(localStorage.getItem("secret"));
@@ -25,6 +26,7 @@ document.getElementById('saveUrl').addEventListener('click', () => {
   localStorage.setItem("url",urlInput);
 })
 
+//toggle Logo
 document.getElementById('toggleLogo').addEventListener('click', () => {
   document.getElementById("passwordScreen").classList.toggle('hidden');
 });
@@ -44,7 +46,7 @@ async function sendResponse(answer) {
     alert('Secret is null');
   }
   try {
-    const res = await axios.post(`${VITE_URL}/update-status`, {
+    const res = await axios.post(`${url}/update-status`, {
       token: secret,
       newStatus: answer
     })
