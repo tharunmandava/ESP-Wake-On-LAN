@@ -1,22 +1,28 @@
 import './style.css'
-import viteLogo from '/vite.svg'
 import axios from 'axios'
 
-const VITE_SECRET = import.meta.env.VITE_SECRET;
-const VITE_URL = import.meta.env.VITE_URL;
-
-console.log(`${VITE_URL}/status`);
-
-document.getElementById("test").addEventListener('click', () => {
+//debug button
+document.getElementById("debugButton").addEventListener('click', () => {
   console.log(localStorage.getItem("secret"));
+  console.log(localStorage.getItem("url"));
 });
 
-document.getElementById('save').addEventListener('click', () => {
+//save secret
+document.getElementById('saveSecret').addEventListener('click', () => {
   const passwordInput = document.getElementById('passwordInput').value;
-  if (passwordInput === ""){
-    alert('its empty!')
+  if (passwordInput === "") {
+    alert('password empty!')
   }
   localStorage.setItem("secret", passwordInput);
+})
+
+//save url
+document.getElementById('saveUrl').addEventListener('click', () => {
+  const urlInput = document.getElementById('urlInput').value;
+  if (urlInput === "") {
+    alert('url empty!')
+  }
+  localStorage.setItem("url",urlInput);
 })
 
 document.getElementById('toggleLogo').addEventListener('click', () => {
@@ -33,7 +39,8 @@ document.getElementById('no').addEventListener('click', () => {
 
 async function sendResponse(answer) {
   const secret = localStorage.getItem("secret");
-  if(secret == null){
+  const url = localStorage.getItem("url");
+  if (secret == null) {
     alert('Secret is null');
   }
   try {
