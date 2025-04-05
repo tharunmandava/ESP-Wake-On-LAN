@@ -7,10 +7,16 @@ const VITE_URL = import.meta.env.VITE_URL;
 
 console.log(`${VITE_URL}/status`);
 
-document.getElementById('save').addEventListener('click', () =>{
-  const passwordInput = document.getElementById('password');
-  localStorage.setItem("secret","passwordInput");
+document.getElementById("test").addEventListener('click', () => {
+  console.log(localStorage.getItem("secret"));
+});
 
+document.getElementById('save').addEventListener('click', () => {
+  const passwordInput = document.getElementById('passwordInput').value;
+  if (passwordInput === ""){
+    alert('its empty!')
+  }
+  localStorage.setItem("secret", passwordInput);
 })
 
 document.getElementById('toggleLogo').addEventListener('click', () => {
@@ -26,9 +32,13 @@ document.getElementById('no').addEventListener('click', () => {
 });
 
 async function sendResponse(answer) {
+  const secret = localStorage.getItem("secret");
+  if(secret == null){
+    alert('Secret is null');
+  }
   try {
     const res = await axios.post(`${VITE_URL}/update-status`, {
-      token: VITE_SECRET,
+      token: secret,
       newStatus: answer
     })
     document.getElementById('status-text').textContent = `server says : ${res.data.message}`;
