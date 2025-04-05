@@ -11,22 +11,22 @@
 <body>
   <div id="app">
     <div>
-      <img src="/public/vite.svg" id="toggleLogo" class="logo" alt="Vite logo" />
+      <img src="/vite.svg" id="toggleLogo" class="logo" alt="Vite logo" />
       <h1>Hello Whizzkid!</h1>
       <div class="card">
         <button id="yes" type="button">yes</button>
         <button id="no" type="button">no</button>
+        <button id="get-status">Get status</button>
       </div>
       <p class="status-text">
         Status
       </p>
       <p class="status-text" id="status-text">
-        Placeholder
       </p>
-      <div id="passwordScreen">
+      <div id="passwordScreen" class="hidden">
         <input type="password" id="passwordInput" placeholder="secret" />
         <button id="saveSecret">save</button>
-        <input id="urlInput" placeholder="URL" />
+        <input type="text" id="urlInput" placeholder="URL" />
         <button id="saveUrl">save</button>
         <button id="debugButton">debug</button>
       </div>

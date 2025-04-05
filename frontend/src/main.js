@@ -1,6 +1,10 @@
 import './style.css'
 import axios from 'axios'
 
+window.onload = async () => {
+ await getResponse();
+}
+
 //debug button
 document.getElementById("debugButton").addEventListener('click', () => {
   const url = localStorage.getItem("url");
@@ -23,39 +27,59 @@ document.getElementById('saveUrl').addEventListener('click', () => {
   if (urlInput === "") {
     alert('url empty!')
   }
-  localStorage.setItem("url",urlInput);
+  localStorage.setItem("url", urlInput);
 })
 
+//toggle Logo
 document.getElementById('toggleLogo').addEventListener('click', () => {
   document.getElementById("passwordScreen").classList.toggle('hidden');
 });
 
-document.getElementById('yes').addEventListener('click', () => {
-  sendResponse('yes');
+document.getElementById('yes').addEventListener('click', async () => {
+  await sendResponse('yes');
 });
 
-document.getElementById('no').addEventListener('click', () => {
-  sendResponse('no');
+document.getElementById('no').addEventListener('click', async () => {
+  await sendResponse('no');
 });
 
-async function sendResponse(answer) {
+document.getElementById('get-status').addEventListener('click', async () => {
+  await getResponse();
+});
+
+const sendResponse = async (answer) => {
   const secret = localStorage.getItem("secret");
   const url = localStorage.getItem("url");
   if (secret == null) {
     alert('Secret is null');
   }
   try {
-    const res = await axios.post(`${VITE_URL}/update-status`, {
+    const res = await axios.post(`${url}/update-status`, {
       token: secret,
       newStatus: answer
     })
-    document.getElementById('status-text').textContent = `server says : ${res.data.message}`;
+    document.getElementById('status-text').textContent = `server updated status with : ${res.data.status}`;
 
   } catch (error) {
     document.getElementById('status-text').textContent = `failed to send request, please try again.`;
+    alert("failed");
     console.log(error);
   }
-}
+};
+
+const getResponse = async () => {
+  const url = localStorage.getItem("url");
+  const res = await axios.get(`${url}/status`);
+  const status = res.data.status;
+  if (status === "no") {
+    document.getElementById('status-text').textContent = `ESP is not pinging Wake-on-LAN requests`;
+  }
+  if (status === "yes") {
+    document.getElementById('status-text').textContent = `ESP is pinging Wake-on-LAN requests`;
+  }
+};
+
+
 
 
 
